@@ -62,19 +62,21 @@ public class RealTimeController {
     public String getMeasures(@RequestParam(value = "assignToken", required = true) String assignToken, @RequestParam(value = "sitewhereToken", required = true) String sitewhereToken) {
 
         String url = "http://localhost:8080/sitewhere/api/assignments/" + assignToken + "/measurements/series";
-        NetworkUtils.doGet(url, sitewhereToken, new ResultInfoInterface() {
-            @Override
-            public void onResponse(String result) {
-                System.out.println(result);
-                result1 = result;
-//                List<MeasureBean> measureBean=JSON.toJavaObject(JSON.parseObject(result), MeasureBean.class);
+        result1 = NetworkUtils.doGetAsync(url, sitewhereToken);
 
-
-            }
-        });
-        while (result1 == null) {
-            continue;
-        }
+//        NetworkUtils.doGet(url, sitewhereToken, new ResultInfoInterface() {
+//            @Override
+//            public void onResponse(String result) {
+//                System.out.println(result);
+//                result1 = result;
+////                List<MeasureBean> measureBean=JSON.toJavaObject(JSON.parseObject(result), MeasureBean.class);
+//
+//
+//            }
+//        });
+//        while (result1 == null) {
+//            continue;
+//        }
         return result1;
     }
 
