@@ -86,19 +86,21 @@ public class RealTimeController {
     public String getStartMeasures(@RequestParam(value = "startDate", required = true) String startDate, @RequestParam(value = "assignToken", required = true) String assignToken, @RequestParam(value = "sitewhereToken", required = true) String sitewhereToken) {
 
         String url = "http://localhost:8080/sitewhere/api/assignments/" + assignToken + "/measurements/series?startDate=" + startDate;
-        NetworkUtils.doGet(url, sitewhereToken, new ResultInfoInterface() {
-            @Override
-            public void onResponse(String result) {
-                System.out.println(result);
-                StartMeasuresResult = result;
-//                List<MeasureBean> measureBean=JSON.toJavaObject(JSON.parseObject(result), MeasureBean.class);
+        StartMeasuresResult = NetworkUtils.doGetAsync(url, sitewhereToken);
 
-
-            }
-        });
-        while (StartMeasuresResult == null) {
-            continue;
-        }
+//        NetworkUtils.doGet(url, sitewhereToken, new ResultInfoInterface() {
+//            @Override
+//            public void onResponse(String result) {
+//                System.out.println(result);
+//                StartMeasuresResult = result;
+////                List<MeasureBean> measureBean=JSON.toJavaObject(JSON.parseObject(result), MeasureBean.class);
+//
+//
+//            }
+//        });
+//        while (StartMeasuresResult == null) {
+//            continue;
+//        }
         return StartMeasuresResult;
     }
 
